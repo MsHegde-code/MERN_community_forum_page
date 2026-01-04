@@ -35,6 +35,13 @@
 
 
 /* Inputs */
+textarea {
+  font-family: inherit;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  background: #f9fafb;
+}
+
 .create-post-card input,
 .create-post-card textarea {
   width: 100%;

@@ -1,14 +1,19 @@
 function PostCard({ post }) {
   return (
-    <div className="post-card">
-      <h3>{post.title}</h3>
-      <p>{post.content}</p>
+    <article className="post-card">
+      <h3 className="post-title">{post.title}</h3>
+
+      <p className="post-content">
+        {post.content.length > 160
+          ? post.content.slice(0, 160) + "..."
+          : post.content}
+      </p>
 
       <div className="post-meta">
         <span>By {post.author}</span>
-        <span>{new Date(post.createdAt).toLocaleString()}</span>
+        <span>{new Date(post.createdAt).toLocaleDateString()}</span>
       </div>
-    </div>
+    </article>
   );
 }
 
