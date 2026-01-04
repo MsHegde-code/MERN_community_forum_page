@@ -3,6 +3,18 @@
   padding: 3rem 6rem 6rem; /* bottom padding for action bar */
 }
 
+/* Category indicator */
+.category-indicator {
+  font-size: 0.95rem;
+  color: #0f172a;
+  padding: 0.75rem 1.25rem;
+  background: rgba(56, 189, 248, 0.1);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  border-left: 3px solid #38bdf8;
+}
+
 /* Card grid */
 .post-grid {
   display: grid;

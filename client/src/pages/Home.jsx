@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { fetchPosts } from "../services/postService";
 import PostCard from "../components/PostCard";
-import BottomActionBar from "../components/ButtomActionBar";
+import { useSearch } from "../context/SearchContext";
 import "../styles/home.css";
 
 function Home() {
   const [posts, setPosts] = useState([]);
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("");
+  const { search, category } = useSearch();
 
   useEffect(() => {
     fetchPosts().then(setPosts);
@@ -24,26 +23,29 @@ function Home() {
     return matchesSearch && matchesCategory;
   });
 
+  const categoryNames = {
+    react: "React",
+    backend: "Backend",
+    mongodb: "MongoDB",
+    general: "General"
+  };
+
   return (
-    <>
-      <div className="home-container">
-        <h2>Community Posts</h2>
-
-        <div className="post-grid">
-          {filteredPosts.map((post) => (
-            <PostCard key={post._id} post={post} />
-          ))}
+    <div className="home-container">
+      {category && (
+        <div className="category-indicator">
+          Showing results from {categoryNames[category] || category}
         </div>
-      </div>
+      )}
 
-      <BottomActionBar
-        search={search}
-        setSearch={setSearch}
-        category={category}
-        setCategory={setCategory}
-      />
-    </>
+      <div className="post-grid">
+        {filteredPosts.map((post) => (
+          <PostCard key={post._id} post={post} />
+        ))}
+      </div>
+    </div>
   );
 }
 
 export default Home;
+

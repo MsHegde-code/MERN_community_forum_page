@@ -1,13 +1,15 @@
 import { Fragment } from "react/jsx-runtime";
 import NavBar from "./components/NavBar";
+import { SearchProvider } from "./context/SearchContext";
 import './App.css'
 
 function App(params) {
   return (
-    <Fragment>
+    <SearchProvider>
       <NavBar/>
-    </Fragment>
+    </SearchProvider>
   )
 }
 
 export default App;
+
