@@ -7,6 +7,7 @@ import CreatePost from "../pages/CreatePost";
 import Dashboard from "../pages/Dashboard";
 import { useSearch } from "../context/SearchContext";
 import Sidebar from "./Sidebar";
+import PostDetails from "../pages/PostDetails";
 
 
 function NavBarContent() {
@@ -145,15 +146,16 @@ function NavBarContent() {
 
 function NavBar() {
   return (
-    <BrowserRouter>
-      <NavBarContent />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/create" element={<CreatePost />} />
-        <Route path="/dashboard" element={<Dashboard/>} />
-      </Routes>
-    </BrowserRouter>
+      <>
+        <NavBarContent />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/create" element={<CreatePost />} />
+          <Route path="/dashboard" element={<Dashboard/>} />
+          <Route path="/posts/:postId" element={<PostDetails />} />
+        </Routes>
+      </>
   );
 }
 
