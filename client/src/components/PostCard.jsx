@@ -1,6 +1,14 @@
+import { useNavigate } from "react-router-dom";
+
 function PostCard({ post }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/post/${post._id}`);
+  };
+
   return (
-    <article className="post-card">
+    <article className="post-card" onClick={handleClick}>
       <h3 className="post-title">{post.title}</h3>
 
       <p className="post-content">

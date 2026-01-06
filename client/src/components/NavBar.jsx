@@ -5,6 +5,8 @@ import Profile from "../pages/Profile";
 import "../styles/navBar.css";
 import CreatePost from "../pages/CreatePost";
 import Dashboard from "../pages/Dashboard";
+import PostDetail from "../pages/PostDetail";
+import Comments from "../pages/Comments";
 import { useSearch } from "../context/SearchContext";
 import Sidebar from "./Sidebar";
 
@@ -152,6 +154,9 @@ function NavBar() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/create" element={<CreatePost />} />
         <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/post/:id" element={<PostDetail />} />
+        <Route path="/comments" element={<Comments />} />
+
       </Routes>
     </BrowserRouter>
   );
