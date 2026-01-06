@@ -5,8 +5,10 @@ import Dashboard from "./pages/Dashboard";
 import PostDetails from "./pages/PostDetails";
 import Users from "./pages/Users";
 import Categories from "./pages/Categories";
+import Home from './pages/Home'
 import Comments from "./pages/Comments";
 import {Routes, Route} from "react-router-dom"
+
 
 
 function App() {
@@ -35,9 +37,10 @@ function App() {
 
           <div className="flex-1 overflow-y-auto">
             <div className="p-6 space-y-6">
-
+              
               <Routes>
-                <Route path="/" element={<Dashboard />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/users" element={<Users />} />
                 <Route path="/posts" element={<PostDetails />} />
                 <Route path="/categories" element={<Categories />} />

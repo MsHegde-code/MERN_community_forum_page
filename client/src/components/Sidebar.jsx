@@ -5,6 +5,7 @@ import {
     Tags,
     LayoutDashboard,
     Zap,
+    Home,
 } from "lucide-react";
 
 import { useNavigate, useLocation } from "react-router-dom";
@@ -12,7 +13,8 @@ import "../styles/sidebar.css";
 import image1 from "../assets/image1.jpg";
 
 const menuItems = [
-    { id: "dashboard", icon: LayoutDashboard, label: "Dashboard", path: "/" },
+    { id: "home", icon: Home, label: "home", path: "/" },
+    { id: "dashboard", icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
     { id: "users", icon: User, label: "Users", path: "/users" },
     { id: "posts", icon: FileTextIcon, label: "Posts", path: "/posts" },
     { id: "categories", icon: Tags, label: "Categories", path: "/categories" },
