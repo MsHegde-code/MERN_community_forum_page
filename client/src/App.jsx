@@ -1,35 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react'
+import Sidebar from "./components/Sidebar";
+import Header from "./components/Header";
+import Dashboard from "./pages/Dashboard";
+import PostDetails from "./pages/PostDetails";
+import Users from "./pages/Users";
+import Categories from "./pages/Categories";
+import Comments from "./pages/Comments";
+import {Routes, Route} from "react-router-dom"
+
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [sideBarCollapsed, setSideBarCollapsed] = useState(false);  //This line controls sidebar open/close
+  const [currentPage, setCurrentPage] = useState("dashboard"); //This line tracks which page is shown
+
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50
+  dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-all duration-500">
+
+      <div className='flex h-screen overflow-hidden'>
+        <Sidebar
+          collapsed={sideBarCollapsed}
+          onToggle={() => setSideBarCollapsed(!sideBarCollapsed)}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+        />
+
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <Header
+            sideBarCollapsed={sideBarCollapsed}
+            onToggleSideBar={() => setSideBarCollapsed(!sideBarCollapsed)}
+          />
+
+          <div className="flex-1 overflow-y-auto">
+            <div className="p-6 space-y-6">
+
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/users" element={<Users />} />
+                <Route path="/posts" element={<PostDetails />} />
+                <Route path="/categories" element={<Categories />} />
+                <Route path="/comments/:postId" element={<Comments />} />
+              </Routes>
+
+            </div>
+          </div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
 export default App
