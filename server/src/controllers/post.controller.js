@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Post from "../models/Posts.js";
 
 /**
@@ -38,6 +39,11 @@ export const getPostById = async (req, res) => {
   try {
     const { id } = req.params;
 
+    // ✅ Prevent CastError
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid post ID" });
+    }
+
     const post = await Post.findById(id);
 
     if (!post) {
@@ -52,3 +58,53 @@ export const getPostById = async (req, res) => {
 };
 
 
+{/* Post Count */}
+export const getPostCount = async (req, res) => {
+  try {
+    const count = await Post.countDocuments();
+    res.json({ count });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch post count" });
+  }
+};
+
+
+export const getPostStats = async (req, res) => {
+  try {
+    const now = new Date();
+
+    // Normalize start date (VERY IMPORTANT)
+    const startDate = new Date(
+      now.getFullYear(),
+      now.getMonth() - 5,
+      1,
+      0,
+      0,
+      0
+    );
+
+    const stats = await Post.aggregate([
+      {
+        $match: {
+          createdAt: { $gte: startDate },
+        },
+      },
+      {
+        $group: {
+          _id: {
+            year: { $year: "$createdAt" },
+            month: { $month: "$createdAt" },
+          },
+          count: { $sum: 1 },
+        },
+      },
+      {
+        $sort: { "_id.year": 1, "_id.month": 1 },
+      },
+    ]);
+
+    res.json(stats);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

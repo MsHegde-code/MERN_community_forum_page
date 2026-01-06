@@ -12,18 +12,12 @@ export const createPost = async (postData) => {
   return res.data;
 };
 
-export const fetchPostById = async (postId) => {
-  if (!postId) return null;
-
-  try {
-    const res = await axios.get(`http://localhost:5000/api/posts/${postId}`);
-    return res.data;
-  } catch (err) {
-    if (err.response?.status === 404) {
-      return null;
-    }
-    throw err;
+export const fetchPostById = async (id) => {
+  const res = await fetch(`http://localhost:5000/api/posts/${id}`);
+  if (!res.ok) {
+    throw new Error(`Failed to fetch post: ${res.status}`);
   }
+  return res.json();
 };
 
 
