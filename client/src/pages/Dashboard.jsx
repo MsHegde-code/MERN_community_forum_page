@@ -1,6 +1,7 @@
 import DashboardSummary from "../components/DashboardSummary";
 import PostsBarChart from "../components/PostsBarChart";
 import "../styles/dashboard.css";
+import UsersTable from "../components/UsersTable";
 
 function Dashboard() {
     return (
@@ -21,6 +22,9 @@ function Dashboard() {
                     {/* Pie chart will be added here later */}
                 </div>
             </div>
+
+            <UsersTable />
+
         </div>
     );
 }

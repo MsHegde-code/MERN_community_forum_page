@@ -1,6 +1,5 @@
 import express from "express";
-import User from "../models/User.js";
-import { getUsersCount } from "../controllers/user.controller.js";
+import { getUsersCount, getAllUsers, deleteUserById } from "../controllers/user.controller.js";
 import protect from "../middleware/authMiddleware.js";
 
 const router = express.Router();
@@ -18,5 +17,12 @@ router.put("/interests", protect, async (req, res) => {
 
 // 📊 Dashboard route (NO auth needed)
 router.get("/count", getUsersCount);
+
+router.get("/", getAllUsers);
+router.get("/count", getUsersCount);
+router.delete("/:id", deleteUserById);
+
+// router.delete("/:id", deleteUser);
+
 
 export default router;

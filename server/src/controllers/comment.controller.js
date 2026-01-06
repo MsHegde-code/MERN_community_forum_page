@@ -30,3 +30,13 @@ export const addComment = async (req, res) => {
     res.status(500).json({ message: "Failed to add comment" });
   }
 };
+
+export const getTotalCommentsCount = async (req, res) => {
+  try {
+    const count = await Comment.countDocuments();
+    res.status(200).json({ count });
+  } catch (error) {
+    console.error("Total comments count error:", error);
+    res.status(500).json({ message: "Failed to fetch comments count" });
+  }
+};

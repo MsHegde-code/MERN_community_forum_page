@@ -5,6 +5,7 @@ import "../styles/dashboardSummary.css";
 function DashboardSummary() {
     const [postsCount, setPostsCount] = useState(0);
     const [usersCount, setUsersCount] = useState(0);
+    const [commentsCount, setCommentsCount] = useState(0);
 
     useEffect(() => {
         axios.get("http://localhost:5000/api/posts/count")
@@ -12,6 +13,20 @@ function DashboardSummary() {
 
         axios.get("http://localhost:5000/api/users/count")
             .then(res => setUsersCount(res.data.count));
+    }, []);
+
+    useEffect(() => {
+        const fetchCommentsCount = async () => {
+            try {
+                const res = await axios.get("http://localhost:5000/api/comments/count");
+                setCommentsCount(res.data?.count ?? 0);
+            } catch (err) {
+                console.warn("Failed to fetch comments count");
+                setCommentsCount(0);
+            }
+        };
+
+        fetchCommentsCount();
     }, []);
 
     const summaryData = [
@@ -29,7 +44,7 @@ function DashboardSummary() {
         },
         {
             title: "Comments",
-            count: 1284,
+            count: commentsCount,
             info: "Added this week",
             icon: "💬",
         },
@@ -41,7 +56,7 @@ function DashboardSummary() {
         },
     ];
 
-    return (
+    return (<>
         <div className="summary-container">
             {summaryData.map((item, index) => (
                 <div className="summary-card" key={index}>
@@ -54,7 +69,7 @@ function DashboardSummary() {
                 </div>
             ))}
         </div>
-    );
+    </>);
 }
 
 export default DashboardSummary;

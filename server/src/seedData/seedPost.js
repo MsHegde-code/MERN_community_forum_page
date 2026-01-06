@@ -43,6 +43,7 @@ const dummyPosts = [
 async function seedPosts() {
   try {
     await dbConnection();
+    await User.deleteMany();
     await Post.insertMany(dummyPosts);
 
     console.log(" Dummy posts inserted successfully");
