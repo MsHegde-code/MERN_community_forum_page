@@ -1,12 +1,18 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 import postRoutes from "./routes/post.routes.js";
 import commentRoutes from "./routes/comment.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 
 import dotenv from "dotenv";
-dotenv.config();
+
+// Ensure .env is loaded even when the server is started from the repo root
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 const app = express();
 

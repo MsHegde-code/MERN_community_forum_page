@@ -7,16 +7,9 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Load auth state from localStorage on app load
+  // Always start unauthenticated on app load
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-
-    if (storedToken) {
-      setToken(storedToken);
-      fetchUserProfile(storedToken);
-    } else {
-      setLoading(false);
-    }
+    setLoading(false);
   }, []);
 
   // Fetch user profile using protected backend route
@@ -41,14 +34,12 @@ export const AuthProvider = ({ children }) => {
 
   // Login function
   const login = (jwtToken) => {
-    localStorage.setItem("token", jwtToken);
     setToken(jwtToken);
     fetchUserProfile(jwtToken);
   };
 
   // Logout function
   const logout = () => {
-    localStorage.removeItem("token");
     setUser(null);
     setToken(null);
     setLoading(false);
