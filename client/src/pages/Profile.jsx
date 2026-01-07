@@ -51,6 +51,13 @@ function Profile() {
 
   useEffect(() => {
     const fetchMyPosts = async () => {
+      // If no token yet (first render), skip fetch
+      if (!token) {
+        setPosts([]);
+        setPostLoading(false);
+        return;
+      }
+
       try {
         const res = await fetch("http://localhost:5000/api/posts/my-posts", {
           headers: {
@@ -58,10 +65,16 @@ function Profile() {
           },
         });
 
+        if (!res.ok) {
+          setPosts([]);
+          return;
+        }
+
         const data = await res.json();
-        setPosts(data);
+        setPosts(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error("Failed to fetch user posts");
+        setPosts([]);
       } finally {
         setPostLoading(false);
       }
@@ -83,7 +96,7 @@ function Profile() {
 
           <p className="profile-label">Interests</p>
           <ul>
-            {user.interests.map((interest, index) => (
+            {(user.interests || []).map((interest, index) => (
               <li key={index}>{interest}</li>
             ))}
           </ul>
@@ -103,15 +116,17 @@ function Profile() {
         ) : posts.length === 0 ? (
           <p>You have not created any posts yet.</p>
         ) : (
-          posts.map((post) => (
-            <div className="post-card" key={post._id}>
-              <h4>{post.title}</h4>
-              <p>{post.content}</p>
-              <span className="post-date">
-                {new Date(post.createdAt).toLocaleDateString()}
-              </span>
-            </div>
-          ))
+          <div className="posts-grid">
+            {posts.map((post) => (
+              <div className="post-card" key={post._id}>
+                <h4>{post.title}</h4>
+                <p>{post.content}</p>
+                <span className="post-date">
+                  {new Date(post.createdAt).toLocaleDateString()}
+                </span>
+              </div>
+            ))}
+          </div>
         )}
       </div>
 

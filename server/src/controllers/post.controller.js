@@ -6,12 +6,17 @@ import Post from "../models/Posts.js";
  */
 export const createPost = async (req, res) => {
   try {
-    const { title, content, author, tags } = req.body;
+    // Ensure request is authenticated
+    if (!req.user) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const { title, content, tags } = req.body;
 
     const post = await Post.create({
       title,
       content,
-      author,
+      author: req.user.name, // store author display name
       tags
     });
 
@@ -112,7 +117,11 @@ export const getPostStats = async (req, res) => {
 // Get posts of logged-in user
 export const getMyPosts = async (req, res) => {
   try {
-    const posts = await Post.find({ author: req.user._id }).sort({
+    if (!req.user) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const posts = await Post.find({ author: req.user.name }).sort({
       createdAt: -1,
     });
 

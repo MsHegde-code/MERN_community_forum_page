@@ -17,12 +17,14 @@ const router = express.Router();
 router.get("/count", getPostCount);
 router.get("/stats", getPostStats);
 
+// Protected user-specific route
+router.get("/my-posts", protect, getMyPosts); // logged-in user's posts
+
+// Create + list
+router.post("/", protect, createPost);
+router.get("/", getAllPosts);
+
 // Dynamic route LAST
 router.get("/:id", getPostById);
-
-// Others
-router.post("/", createPost);
-router.get("/", getAllPosts);
-router.get("/my-posts", protect, getMyPosts); // logged-in user's posts
 
 export default router;

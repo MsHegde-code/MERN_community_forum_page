@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createPost } from "../services/postService";
+import { useAuth } from "../context/authContext";
 import { toast } from "react-toastify";
 import "../styles/createPost.css";
 
 function CreatePost() {
   const navigate = useNavigate();
+  const { token, user } = useAuth();
 
   const [form, setForm] = useState({
     title: "",
@@ -17,14 +19,21 @@ function CreatePost() {
     e.preventDefault();
 
     try {
+      if (!token) {
+        toast.error("You must be logged in to create a post.");
+        return;
+      }
+
       const payload = {
         title: form.title,
         content: form.content,
-        author: "Guest",
-        tags: form.tags.split(",").map(tag => tag.trim())
+        author: user?.name || "Guest",
+        tags: form.tags
+          ? form.tags.split(",").map(tag => tag.trim()).filter(Boolean)
+          : []
       };
 
-      await createPost(payload);
+      await createPost(payload, token);
 
       toast.success("Post created successfully!");
 

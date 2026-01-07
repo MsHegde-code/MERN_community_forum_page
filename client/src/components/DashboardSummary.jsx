@@ -11,7 +11,7 @@ function DashboardSummary() {
         axios.get("http://localhost:5000/api/posts/count")
             .then(res => setPostsCount(res.data.count));
 
-        axios.get("http://localhost:5000/api/users/count")
+        axios.get("http://localhost:5000/api/user/count")
             .then(res => setUsersCount(res.data.count));
     }, []);
 

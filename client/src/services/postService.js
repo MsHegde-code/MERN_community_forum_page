@@ -7,8 +7,12 @@ export const fetchPosts = async () => {
   return res.data;
 };
 
-export const createPost = async (postData) => {
-  const res = await axios.post(API_URL, postData);
+export const createPost = async (postData, token) => {
+  const res = await axios.post(API_URL, postData, {
+    headers: token
+      ? { Authorization: `Bearer ${token}` }
+      : undefined,
+  });
   return res.data;
 };
 
