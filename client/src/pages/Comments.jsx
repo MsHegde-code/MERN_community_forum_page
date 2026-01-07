@@ -6,11 +6,13 @@ import {
 } from "../services/CommentService";
 
 import CommentBox from "../components/CommentBox";
+import { useAuth } from "../context/authContext.jsx";
 import "../styles/comments.css";
+
 
 function Comments() {
   const { postId } = useParams();
-
+  const { user, token } = useAuth();
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -31,12 +33,17 @@ function Comments() {
   }, [postId]);
 
   /* ---------------- ADD COMMENT ---------------- */
-  const handleAddComment = async ({ author, text }) => {
-    const newComment = await addComment(postId, {
-      author,
-      text
-    });
+  const handleAddComment = async ({ text }) => {
+    if (!token || !user?.name) {
+      alert("You must be logged in to comment.");
+      return;
+    }
 
+    const newComment = await addComment(
+      postId,
+      { text },
+      token
+    );
     setComments((prev) => [newComment, ...prev]);
   };
 

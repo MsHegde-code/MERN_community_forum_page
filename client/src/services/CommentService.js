@@ -13,7 +13,9 @@ export const fetchCommentsByPostId = async (postId) => {
 /**
  * Add a new comment to a post
  */
-export const addComment = async (postId, commentData) => {
-  const res = await axios.post(`${API_BASE}/${postId}`, commentData);
+export const addComment = async (postId, commentData, token) => {
+  const res = await axios.post(`${API_BASE}/${postId}`, commentData, {
+    headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+  });
   return res.data;
 };

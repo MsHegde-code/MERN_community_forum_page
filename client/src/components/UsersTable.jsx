@@ -14,6 +14,7 @@ function UsersTable() {
     try {
       const res = await axios.get("http://localhost:5000/api/user");
       setUsers(res.data);
+      console.log(res.data);
     } catch (err) {
       console.error("Failed to fetch users");
     } finally {
@@ -23,7 +24,7 @@ function UsersTable() {
 
     const handleDelete = async (id) => {
     try {
-        await axios.delete(`http://localhost:5000/api/users/${id}`);
+        await axios.delete(`http://localhost:5000/api/user/${id}`);
         setUsers(prev => prev.filter(user => user._id !== id));
 
     } catch (err) {
@@ -41,7 +42,7 @@ function UsersTable() {
       <table className="users-table">
         <thead>
           <tr>
-            <th>Username</th>
+            <th>Name</th>
             <th>Email</th>
             <th>Interests</th>
             <th>Action</th>
@@ -51,7 +52,7 @@ function UsersTable() {
         <tbody>
           {users.map((user) => (
             <tr key={user._id}>
-              <td>{user.username}</td>
+              <td>{user.name}</td>
               <td>{user.email}</td>
               <td>{user.interests}</td>
               <td>

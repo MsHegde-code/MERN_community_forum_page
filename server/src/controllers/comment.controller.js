@@ -13,16 +13,20 @@ export const getCommentsByPostId = async (req, res) => {
 
 export const addComment = async (req, res) => {
   try {
-    const { text, author } = req.body;
+    if (!req.user) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
 
-    if (!text || !author) {
+    const { text } = req.body;
+
+    if (!text) {
       return res.status(400).json({ message: "Missing fields" });
     }
 
     const comment = await Comment.create({
       postId: req.params.postId,
       text,
-      author
+      author: req.user.name
     });
 
     res.status(201).json(comment);

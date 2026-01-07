@@ -1,33 +1,29 @@
 import { useState } from "react";
+import { useAuth } from "../context/authContext";
 
 function CommentBox({ onSubmit }) {
-  const [author, setAuthor] = useState("");
+  const { user } = useAuth();
   const [text, setText] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!author.trim() || !text.trim()) {
-      alert("Both fields are required");
+    if (!text.trim()) {
+      alert("Comment cannot be empty");
       return;
     }
 
-    await onSubmit({ author, text });
+    await onSubmit({ text });
 
-    setAuthor("");
     setText("");
   };
 
   return (
     <form className="comment-box" onSubmit={handleSubmit}>
-      <input
-        placeholder="Your name"
-        value={author}
-        onChange={(e) => setAuthor(e.target.value)}
-      />
-
       <textarea
-        placeholder="Write a comment..."
+        placeholder={
+          user?.name ? `Comment as ${user.name}` : "Write a comment..."
+        }
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
