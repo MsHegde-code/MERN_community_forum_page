@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
@@ -8,7 +8,6 @@ import Dashboard from "../pages/Dashboard";
 import { useSearch } from "../context/SearchContext";
 import Sidebar from "./Sidebar";
 import PostDetails from "../pages/PostDetails";
-
 
 function NavBarContent() {
   const { search, setSearch, category, setCategory } = useSearch();

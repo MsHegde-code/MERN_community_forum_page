@@ -108,3 +108,16 @@ export const getPostStats = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// Get posts of logged-in user
+export const getMyPosts = async (req, res) => {
+  try {
+    const posts = await Post.find({ author: req.user._id }).sort({
+      createdAt: -1,
+    });
+
+    res.json(posts);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch user posts" });
+  }
+};

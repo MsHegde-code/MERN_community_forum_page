@@ -1,15 +1,29 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/authContext";
 import NavBar from "./components/NavBar";
-import { SearchProvider } from "./context/SearchContext";
-import "./App.css";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
   return (
-    <SearchProvider>
+    <AuthProvider>
       <BrowserRouter>
-        <NavBar />
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+
+          <Route
+            path="/*"
+            element={
+              <PrivateRoute>
+                <NavBar />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
       </BrowserRouter>
-    </SearchProvider>
+    </AuthProvider>
   );
 }
 

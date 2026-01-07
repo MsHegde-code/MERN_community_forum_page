@@ -4,8 +4,10 @@ import {
   getAllPosts,
   getPostById,
   getPostCount,
-  getPostStats
+  getPostStats,
+  getMyPosts
 } from "../controllers/post.controller.js";
+import protect from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -21,5 +23,6 @@ router.get("/:id", getPostById);
 // Others
 router.post("/", createPost);
 router.get("/", getAllPosts);
+router.get("/my-posts", protect, getMyPosts); // logged-in user's posts
 
 export default router;
