@@ -83,31 +83,47 @@
   margin: 0;
 } */
 
-/*2 Column*/
-/* Interests container */
-.interest-group {
-  margin-bottom: 15px;
-}
-
-/* 2-column grid */
-.interest-group.two-column {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 20px;
-  row-gap: 10px;
-}
-
-/* Each interest row */
-.interest-item {
+/* Modern Interest Chips */
+.interest-chips-container {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 13px;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
 }
 
-/* Remove default checkbox spacing */
-.interest-item input[type="checkbox"] {
-  margin: 0;
+.interest-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: #F3F4F6;
+  color: #374151;
+  border: 1px solid #E5E7EB;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.interest-chip:hover {
+  background: #E5E7EB;
+}
+
+.interest-chip.selected {
+  background: #2563EB;
+  color: #FFFFFF;
+  border-color: #2563EB;
+}
+
+.interest-chip.selected:hover {
+  background: #1D4ED8;
+  border-color: #1D4ED8;
+}
+
+.checkmark-icon {
+  flex-shrink: 0;
 }
 
 .step-indicator {

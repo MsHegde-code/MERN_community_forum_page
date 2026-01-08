@@ -130,17 +130,41 @@ function Signup() {
             <>
               <label>Interests:</label>
 
-              <div className="interest-group two-column">
+              <div className="interest-chips-container">
                 {ALL_INTERESTS.map((item) => (
-                  <div className="interest-item" key={item}>
-                    <span>{item}</span>
+                  <label
+                    key={item}
+                    className={`interest-chip ${
+                      formData.interests.includes(item) ? "selected" : ""
+                    }`}
+                  >
                     <input
                       type="checkbox"
                       value={item}
                       checked={formData.interests.includes(item)}
                       onChange={handleInterestChange}
+                      hidden
                     />
-                  </div>
+                    {formData.interests.includes(item) && (
+                      <svg
+                        className="checkmark-icon"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M13.3333 4L6 11.3333L2.66667 8"
+                          stroke="white"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
+                    <span>{item}</span>
+                  </label>
                 ))}
               </div>
 
