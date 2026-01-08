@@ -1,0 +1,91 @@
+.create-post-container {
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  background-color: #f8fafc;
+
+  /* Center content */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding-top: 3rem;
+}
+
+/* Wrapper to control width */
+.create-post-wrapper {
+  width: 100%;
+  max-width: 900px;
+  padding: 0 1rem;
+}
+
+.create-post-wrapper h2 {
+  font-size: 2.6rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #0f172a;
+}
+
+/* Card */
+.create-post-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Inputs */
+textarea {
+  font-family: inherit;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  background: #f9fafb;
+}
+
+.create-post-card input,
+.create-post-card textarea {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5f5;
+  font-size: 1rem;
+}
+
+/* Textarea */
+.create-post-card textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+/* Hashtags */
+.hashtag-hint {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Buttons */
+.create-post-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.create-post-actions button {
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.submit-btn {
+  background-color: #2563eb;
+  color: white;
+}
+
+.cancel-btn {
+  background-color: #e5e7eb;
+}

@@ -1,0 +1,134 @@
+/* Page container */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Push content below navbar */
+  padding-top: 60px;
+  background-color: #f5f5f5;
+}
+
+/* Login box */
+.login-box {
+  width: 320px;
+  padding: 30px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.login-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background: #e50914;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.login-box button:hover {
+  background: #c40812;
+}
+
+.register-text {
+  margin-top: 12px;
+  text-align: right;
+  font-size: 12px;
+}
+
+.register-text a {
+  text-decoration: none; /* remove underline */
+  color: #555;
+}
+
+.register-text a:hover {
+  color: #e50914; /* hover color */
+}
+
+.login-box select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+}
+
+/* Interests container
+.interest-group {
+  margin-bottom: 15px;
+}*/
+
+/* Each interest row
+.interest-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  margin-bottom: 6px;
+}*/
+
+/* Remove default checkbox spacing
+.interest-row input[type="checkbox"] {
+  margin: 0;
+} */
+
+/*2 Column*/
+/* Interests container */
+.interest-group {
+  margin-bottom: 15px;
+}
+
+/* 2-column grid */
+.interest-group.two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
+  row-gap: 10px;
+}
+
+/* Each interest row */
+.interest-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+/* Remove default checkbox spacing */
+.interest-item input[type="checkbox"] {
+  margin: 0;
+}
+
+.step-indicator {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.error-text {
+  color: red;
+  font-size: 13px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.signup-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.signup-actions button {
+  width: 48%;
+}
