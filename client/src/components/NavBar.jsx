@@ -1,13 +1,16 @@
+// Imports at top
 import { Route, Routes, useNavigate, Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
 import "../styles/navBar.css";
 import CreatePost from "../pages/CreatePost";
 import Dashboard from "../pages/Dashboard";
+import ManageSubjects from "../pages/ManageSubjects"; // New Import
 import { useSearch } from "../context/SearchContext";
 import PostDetails from "../pages/PostDetails";
 import { useAuth } from "../context/authContext";
+import { getAllSubjects } from "../services/subjectService"; // New Import
 
 function NavBarContent() {
   const { search, setSearch, category, setCategory } = useSearch();
@@ -15,6 +18,14 @@ function NavBarContent() {
   const { user, logout } = useAuth();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [subjects, setSubjects] = useState([]); // Dynamic subjects
+
+  // Fetch subjects
+  useEffect(() => {
+    getAllSubjects()
+      .then(setSubjects)
+      .catch(err => console.error("Failed to fetch subjects", err));
+  }, []);
 
   const toggleFilter = () => setIsFilterOpen(!isFilterOpen);
   const closeFilter = () => setIsFilterOpen(false);
@@ -33,11 +44,10 @@ function NavBarContent() {
     setIsFilterOpen(false);
   };
 
-  const categoryNames = {
-    react: "React",
-    backend: "Backend",
-    mongodb: "MongoDB",
-    general: "General"
+  // Helper to get display name
+  const getCategoryName = (catVal) => {
+    const sub = subjects.find(s => s.name.toLowerCase() === catVal.toLowerCase() || s.name === catVal);
+    return sub ? sub.name : catVal;
   };
 
   return (
@@ -45,6 +55,9 @@ function NavBarContent() {
       <header className="navbar">
         <div className="navbar-container">
           <div className="navbar-left">
+            <Link to="/" className="navbar-home-icon-btn" title="Go to Home">
+              <span className="home-icon">🏠</span>
+            </Link>
             <Link to="/" className="navbar-logo">Community Forum</Link>
           </div>
 
@@ -72,7 +85,7 @@ function NavBarContent() {
                   {category && (
                     <>
                       <span className="navbar-filter-category-name">
-                        {categoryNames[category] || category}
+                        {getCategoryName(category)}
                       </span>
                       <button
                         className="navbar-filter-clear"
@@ -105,30 +118,15 @@ function NavBarContent() {
                         >
                           All Categories
                         </button>
-                        <button
-                          className={`navbar-filter-option ${category === "react" ? "active" : ""}`}
-                          onClick={() => handleCategorySelect("react")}
-                        >
-                          React
-                        </button>
-                        <button
-                          className={`navbar-filter-option ${category === "backend" ? "active" : ""}`}
-                          onClick={() => handleCategorySelect("backend")}
-                        >
-                          Backend
-                        </button>
-                        <button
-                          className={`navbar-filter-option ${category === "mongodb" ? "active" : ""}`}
-                          onClick={() => handleCategorySelect("mongodb")}
-                        >
-                          MongoDB
-                        </button>
-                        <button
-                          className={`navbar-filter-option ${category === "general" ? "active" : ""}`}
-                          onClick={() => handleCategorySelect("general")}
-                        >
-                          General
-                        </button>
+                        {subjects.map((sub) => (
+                          <button
+                            key={sub._id}
+                            className={`navbar-filter-option ${category === sub.name ? "active" : ""}`}
+                            onClick={() => handleCategorySelect(sub.name)}
+                          >
+                            {sub.name}
+                          </button>
+                        ))}
                       </div>
                     </div>
                   </>
@@ -170,9 +168,14 @@ function NavBarContent() {
                         <span>View Profile</span>
                       </Link>
                       {user?.isAdmin && (
-                        <Link to="/dashboard" className="navbar-profile-item" onClick={closeProfile}>
-                          <span>Dashboard</span>
-                        </Link>
+                        <>
+                          <Link to="/dashboard" className="navbar-profile-item" onClick={closeProfile}>
+                            <span>Dashboard</span>
+                          </Link>
+                          <Link to="/admin/subjects" className="navbar-profile-item" onClick={closeProfile}>
+                            <span>Add Subjects</span>
+                          </Link>
+                        </>
                       )}
                       <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', margin: '4px 0' }}></div>
                       <button className="navbar-profile-item" onClick={handleLogout}>
@@ -200,6 +203,7 @@ function NavBar() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/create" element={<CreatePost />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/admin/subjects" element={<ManageSubjects />} />
         <Route path="/posts/:postId" element={<PostDetails />} />
       </Routes>
     </>

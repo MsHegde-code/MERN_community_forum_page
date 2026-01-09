@@ -45,6 +45,7 @@ function Login() {
 
   return (
     <div className="login-page">
+      <h1 className="auth-site-title">Community Forum</h1>
       <div className="login-box">
         <h2>Login</h2>
 

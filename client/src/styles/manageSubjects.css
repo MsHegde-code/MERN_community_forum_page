@@ -1,0 +1,135 @@
+.manage-subjects-container {
+    max-width: 900px;
+    margin: 75px auto 40px;
+    padding: 0 20px;
+    font-family: inherit;
+}
+
+.manage-subjects-container h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: #6b7280;
+    margin-bottom: 2rem;
+}
+
+/* Add Card */
+.add-subject-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+}
+
+.add-subject-form {
+    display: flex;
+    gap: 1rem;
+}
+
+.add-subject-form input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.add-subject-form input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.add-subject-form button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 0 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.add-subject-form button:hover:not(:disabled) {
+    background: #1d4ed8;
+}
+
+.add-subject-form button:disabled {
+    background: #93c5fd;
+    cursor: not-allowed;
+}
+
+.error-msg {
+    color: #ef4444;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* List Card */
+.subjects-list-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.subjects-list-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: #374151;
+}
+
+.subjects-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.subjects-table th {
+    text-align: left;
+    padding: 1rem;
+    border-bottom: 2px solid #e5e7eb;
+    color: #4b5563;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.subjects-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #f3f4f6;
+    vertical-align: middle;
+}
+
+.subject-name-cell {
+    font-weight: 500;
+    color: #111827;
+}
+
+.delete-btn {
+    background: #fee2e2;
+    color: #ef4444;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.delete-btn:hover {
+    background: #fecaca;
+    color: #dc2626;
+}
+
+.empty-msg {
+    color: #9ca3af;
+    font-style: italic;
+}

@@ -1,20 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { createPost } from "../services/postService";
 import { useAuth } from "../context/authContext";
 import { toast } from "react-toastify";
+import { getAllSubjects } from "../services/subjectService";
 import "../styles/createPost.css";
-import BackButton from "../components/BackButton";
 
 function CreatePost() {
   const navigate = useNavigate();
   const { token, user } = useAuth();
+  const [subjects, setSubjects] = useState([]);
 
   const [form, setForm] = useState({
     title: "",
     content: "",
-    tags: ""
+    tags: "",
+    category: ""
   });
+
+  useEffect(() => {
+    getAllSubjects()
+      .then(setSubjects)
+      .catch((err) => toast.error("Failed to load categories"));
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,10 +33,16 @@ function CreatePost() {
         return;
       }
 
+      if (!form.category) {
+        toast.error("Please select a category");
+        return;
+      }
+
       const payload = {
         title: form.title,
         content: form.content,
         author: user?.name || "Guest",
+        category: form.category,
         tags: form.tags
           ? form.tags.split(",").map(tag => tag.trim()).filter(Boolean)
           : []
@@ -51,7 +65,6 @@ function CreatePost() {
   return (
     <div className="create-post-container">
       <div className="create-post-wrapper">
-        <BackButton />
         <h2>Create Post</h2>
 
         <div className="create-post-card">
@@ -66,6 +79,21 @@ function CreatePost() {
               }
               required
             />
+
+            <label>Category</label>
+            <select
+              value={form.category}
+              onChange={(e) => setForm({ ...form, category: e.target.value })}
+              required
+              className="create-post-select"
+            >
+              <option value="" disabled>Select a category</option>
+              {subjects.map((sub) => (
+                <option key={sub._id} value={sub.name}>
+                  {sub.name}
+                </option>
+              ))}
+            </select>
 
             <label>Content</label>
             <textarea

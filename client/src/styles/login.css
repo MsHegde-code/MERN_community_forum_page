@@ -2,12 +2,23 @@
 .login-page {
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
+  /* Stack title and box */
   align-items: center;
   justify-content: center;
 
   /* Push content below navbar */
   padding-top: 60px;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../assets/loginPageBg.jpg") no-repeat center center/cover;
+}
+
+.auth-site-title {
+  color: #fff;
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
+  text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 /* Login box */

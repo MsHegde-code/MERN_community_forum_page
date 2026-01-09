@@ -2,7 +2,6 @@ import "../styles/profile.css";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/authContext.jsx";
 import { useNavigate } from "react-router-dom";
-import BackButton from "../components/BackButton";
 
 const ALL_INTERESTS = ["Politics", "Sports", "Technology", "Science"];
 
@@ -88,7 +87,6 @@ function Profile() {
 
   return (
     <div className="profile-page">
-      <BackButton />
       {/* PROFILE CARD */}
       <div className="profile-card">
         <div className="profile-image">
@@ -169,9 +167,8 @@ function Profile() {
               {ALL_INTERESTS.map((item) => (
                 <label
                   key={item}
-                  className={`interest-chip ${
-                    selectedInterests.includes(item) ? "selected" : ""
-                  }`}
+                  className={`interest-chip ${selectedInterests.includes(item) ? "selected" : ""
+                    }`}
                 >
                   <input
                     type="checkbox"

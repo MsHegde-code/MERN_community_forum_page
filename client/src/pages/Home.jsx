@@ -18,23 +18,16 @@ function Home() {
       post.content.toLowerCase().includes(search.toLowerCase());
 
     const matchesCategory =
-      !category || post.tags?.includes(category);
+      !category || post.category === category;
 
     return matchesSearch && matchesCategory;
   });
-
-  const categoryNames = {
-    react: "React",
-    backend: "Backend",
-    mongodb: "MongoDB",
-    general: "General"
-  };
 
   return (
     <div className="home-container">
       {category && (
         <div className="category-indicator">
-          Showing results from {categoryNames[category] || category}
+          Showing results from {category}
         </div>
       )}
 

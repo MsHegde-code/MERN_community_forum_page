@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { getAllSubjects } from "../services/subjectService";
 import "../styles/dashboardSummary.css";
 
 function DashboardSummary() {
     const [postsCount, setPostsCount] = useState(0);
     const [usersCount, setUsersCount] = useState(0);
     const [commentsCount, setCommentsCount] = useState(0);
+    const [subjectsCount, setSubjectsCount] = useState(0);
 
     useEffect(() => {
         axios.get("http://localhost:5000/api/posts/count")
@@ -13,6 +15,10 @@ function DashboardSummary() {
 
         axios.get("http://localhost:5000/api/user/count")
             .then(res => setUsersCount(res.data.count));
+
+        getAllSubjects()
+            .then(data => setSubjectsCount(data.length))
+            .catch(err => console.error(err));
     }, []);
 
     useEffect(() => {
@@ -33,7 +39,7 @@ function DashboardSummary() {
         {
             title: "Users",
             count: usersCount,
-            info: "Registered this week",
+            info: "Total Users",
             icon: "👤",
         },
         {
@@ -45,13 +51,13 @@ function DashboardSummary() {
         {
             title: "Comments",
             count: commentsCount,
-            info: "Added this week",
+            info: "Total Comments",
             icon: "💬",
         },
         {
             title: "Categories",
-            count: 12,
-            info: "Added this week",
+            count: subjectsCount,
+            info: "Active Categories",
             icon: "📂",
         },
     ];
@@ -63,7 +69,7 @@ function DashboardSummary() {
                     <div className="card-left">
                         <h4>{item.title}</h4>
                         <h2>{item.count}</h2>
-                        <p>↑ {item.info}</p>
+                        <p>{item.info}</p>
                     </div>
                     <div className="card-icon">{item.icon}</div>
                 </div>

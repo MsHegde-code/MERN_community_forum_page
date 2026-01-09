@@ -75,6 +75,7 @@ function Signup() {
 
   return (
     <div className="login-page">
+      <h1 className="auth-site-title">Community Forum</h1>
       <div className="login-box">
         <h2>Sign Up</h2>
 
@@ -134,9 +135,8 @@ function Signup() {
                 {ALL_INTERESTS.map((item) => (
                   <label
                     key={item}
-                    className={`interest-chip ${
-                      formData.interests.includes(item) ? "selected" : ""
-                    }`}
+                    className={`interest-chip ${formData.interests.includes(item) ? "selected" : ""
+                      }`}
                   >
                     <input
                       type="checkbox"

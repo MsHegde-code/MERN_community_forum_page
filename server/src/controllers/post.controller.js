@@ -11,12 +11,13 @@ export const createPost = async (req, res) => {
       return res.status(401).json({ message: "Unauthorized" });
     }
 
-    const { title, content, tags } = req.body;
+    const { title, content, tags, category } = req.body;
 
     const post = await Post.create({
       title,
       content,
       author: req.user.name, // store author display name
+      category,
       tags
     });
 
@@ -63,7 +64,7 @@ export const getPostById = async (req, res) => {
 };
 
 
-{/* Post Count */}
+{/* Post Count */ }
 export const getPostCount = async (req, res) => {
   try {
     const count = await Post.countDocuments();

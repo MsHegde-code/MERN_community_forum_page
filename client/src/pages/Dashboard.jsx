@@ -2,12 +2,10 @@ import DashboardSummary from "../components/DashboardSummary";
 import PostsBarChart from "../components/PostsBarChart";
 import "../styles/dashboard.css";
 import UsersTable from "../components/UsersTable";
-import BackButton from "../components/BackButton";
 
 function Dashboard() {
     return (
         <div className="dashboard-container">
-            <BackButton />
             <h2>Dashboard</h2>
 
             {/* Charts Row with Summary Cards */}
