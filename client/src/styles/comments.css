@@ -2,13 +2,15 @@
 
 .post-details-container {
   max-width: 900px;
-  margin: 40px auto;
+  margin: 75px auto 40px;
+  /* Clear navbar and bottom space */
   padding: 0 20px;
+  position: relative;
+  /* Context for Back Button */
+  padding-top: 3rem;
+  /* Space for Back Button */
 }
 
-.post-details-container .back-button {
-  margin-bottom: 1.5rem;
-}
 
 .post-details-card {
   background: #ffffff;

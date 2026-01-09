@@ -3,15 +3,22 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 1.2rem;
-  background: #f3f4f6;
-  color: #374151;
-  border: 1px solid #e5e7eb;
+  background: transparent;
+  /* Cleaner look for top corner */
+  color: #64748b;
+  border: none;
+  /* Remove border for cleaner floating look */
   border-radius: 8px;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
-  margin-bottom: 1.5rem;
+
+  /* Absolute positioning */
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
 }
 
 .back-button:hover {

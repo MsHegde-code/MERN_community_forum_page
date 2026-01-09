@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { adminCredentials } from "../config/admin.js";
 
 /**
  * @desc Register new user
@@ -9,6 +10,17 @@ import jwt from "jsonwebtoken";
 export const registerUser = async (req, res) => {
   try {
     const { name, email, password, gender, interests } = req.body;
+
+    // Email Validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ message: "Invalid email format" });
+    }
+
+    // Block Admin Email Registration
+    if (email === adminCredentials.email || email === "admin@forum.com") {
+      return res.status(400).json({ message: "Cannot register with this email" });
+    }
 
     // Check if user already exists
     const existingUser = await User.findOne({ email });
@@ -42,6 +54,24 @@ export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    // Check for Admin Login
+    if (email === adminCredentials.email && password === adminCredentials.password) {
+      const token = jwt.sign(
+        { id: "admin-id", isAdmin: true },
+        process.env.JWT_SECRET,
+        { expiresIn: "1d" }
+      );
+      return res.json({
+        token,
+        user: {
+          _id: "admin-id",
+          name: "Admin",
+          email: adminCredentials.email,
+          isAdmin: true
+        }
+      });
+    }
+
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({ message: "Invalid credentials" });
@@ -57,13 +87,13 @@ export const login = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: user._id },
+      { id: user._id, isAdmin: false },
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
 
 
-    res.json({ token });
+    res.json({ token, user: { ...user.toObject(), isAdmin: false } });
   } catch (err) {
     console.error("Login error:", err);
     res.status(500).json({ message: "Server error" });

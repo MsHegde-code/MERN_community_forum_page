@@ -8,7 +8,8 @@
   justify-content: center;
   align-items: flex-start;
 
-  padding-top: 3rem;
+  margin-top: 75px;
+  /* Push below navbar */
 }
 
 /* Wrapper to control width */
@@ -16,11 +17,12 @@
   width: 100%;
   max-width: 900px;
   padding: 0 1rem;
+  position: relative;
+  /* Context for Back Button */
+  padding-top: 3rem;
+  /* Space for Back Button */
 }
 
-.create-post-wrapper .back-button {
-  margin-bottom: 1.5rem;
-}
 
 .create-post-wrapper h2 {
   font-size: 2.6rem;
