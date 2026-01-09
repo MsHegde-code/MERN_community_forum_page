@@ -14,7 +14,7 @@ export const getUsersCount = async (req, res) => {
  */
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find().select("username email interests");
+    const users = await User.find().select("name email interests");
     res.status(200).json(users);
   } catch (error) {
     console.error("Fetch users error:", error);

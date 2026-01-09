@@ -9,12 +9,11 @@ function UsersTable() {
   useEffect(() => {
     fetchUsers();
   }, []);
-
+  
   const fetchUsers = async () => {
     try {
       const res = await axios.get("http://localhost:5000/api/user");
       setUsers(res.data);
-      console.log(res.data);
     } catch (err) {
       console.error("Failed to fetch users");
     } finally {
@@ -52,9 +51,13 @@ function UsersTable() {
         <tbody>
           {users.map((user) => (
             <tr key={user._id}>
-              <td>{user.name}</td>
+              <td>{user.name || "N/A"}</td>
               <td>{user.email}</td>
-              <td>{user.interests}</td>
+              <td>
+                {Array.isArray(user.interests) 
+                  ? user.interests.join(", ") 
+                  : (user.interests || "N/A")}
+              </td>
               <td>
                 <button
                   className="delete-btn"

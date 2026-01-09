@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { fetchPostById } from "../services/postService";
 import Comments from "./Comments";
 import "../styles/comments.css";
+import BackButton from "../components/BackButton";
 
 function PostDetails() {
   const { postId } = useParams();
@@ -16,6 +17,7 @@ function PostDetails() {
 
   return (
     <div className="post-details-container">
+      <BackButton />
       <div className="post-details-card">
         <h1 className="post-details-title">{post.title}</h1>
 

@@ -2,24 +2,24 @@ import DashboardSummary from "../components/DashboardSummary";
 import PostsBarChart from "../components/PostsBarChart";
 import "../styles/dashboard.css";
 import UsersTable from "../components/UsersTable";
+import BackButton from "../components/BackButton";
 
 function Dashboard() {
     return (
         <div className="dashboard-container">
+            <BackButton />
             <h2>Dashboard</h2>
 
-            <DashboardSummary />
-
-            {/* Charts Row */}
+            {/* Charts Row with Summary Cards */}
             <div className="charts-row">
                 {/* Left: Bar Chart */}
                 <div className="chart-half">
                     <PostsBarChart />
                 </div>
 
-                {/* Right: Empty placeholder for Pie Chart */}
-                <div className="chart-half empty-card">
-                    {/* Pie chart will be added here later */}
+                {/* Right: Summary Cards */}
+                <div className="summary-cards-column">
+                    <DashboardSummary />
                 </div>
             </div>
 

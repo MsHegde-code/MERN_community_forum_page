@@ -2,6 +2,7 @@ import "../styles/profile.css";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/authContext.jsx";
 import { useNavigate } from "react-router-dom";
+import BackButton from "../components/BackButton";
 
 const ALL_INTERESTS = ["Politics", "Sports", "Technology", "Science"];
 
@@ -87,6 +88,7 @@ function Profile() {
 
   return (
     <div className="profile-page">
+      <BackButton />
       {/* PROFILE CARD */}
       <div className="profile-card">
         <div className="profile-image">
@@ -143,12 +145,14 @@ function Profile() {
                     ? post.content.slice(0, 160) + "..."
                     : post.content}
                 </p>
-                {post.content.length > 160 && (
-                  <span className="read-more">Read more →</span>
-                )}
-                <span className="post-date">
-                  {new Date(post.createdAt).toLocaleDateString()}
-                </span>
+                <div className="post-footer">
+                  {post.content.length > 160 && (
+                    <span className="read-more">Read more →</span>
+                  )}
+                  <span className="post-date">
+                    {new Date(post.createdAt).toLocaleDateString()}
+                  </span>
+                </div>
               </div>
             ))}
           </div>

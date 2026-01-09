@@ -4,6 +4,7 @@ import { createPost } from "../services/postService";
 import { useAuth } from "../context/authContext";
 import { toast } from "react-toastify";
 import "../styles/createPost.css";
+import BackButton from "../components/BackButton";
 
 function CreatePost() {
   const navigate = useNavigate();
@@ -50,6 +51,7 @@ function CreatePost() {
   return (
     <div className="create-post-container">
       <div className="create-post-wrapper">
+        <BackButton />
         <h2>Create Post</h2>
 
         <div className="create-post-card">

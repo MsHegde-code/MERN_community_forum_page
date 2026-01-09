@@ -37,11 +37,12 @@ function NavBarContent() {
     <>
       <header className="navbar">
         <div className="navbar-container">
-          <button className="navbar-hamburger" onClick={toggleSidebar}>
-            ☰
-          </button>
-          
-          <h1 className="navbar-logo">Community Forum</h1>
+          <div className="navbar-left">
+            <button className="navbar-hamburger" onClick={toggleSidebar}>
+              ☰
+            </button>
+            <h1 className="navbar-logo">Community Forum</h1>
+          </div>
 
           <div className="navbar-actions">
             <div className="navbar-search">

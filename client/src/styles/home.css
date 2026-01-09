@@ -1,6 +1,8 @@
 /* Content container */
 .home-container {
   padding: 3rem 6rem 6rem; /* bottom padding for action bar */
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 /* Category indicator */
@@ -18,8 +20,10 @@
 /* Card grid */
 .post-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 2.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 /* Card */
@@ -31,6 +35,9 @@
   border: 1px solid rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
 }
 
 /* Hover effect with glow highlight */
@@ -57,11 +64,38 @@
   line-height: 1.75;
   color: #4b5563;
   margin-bottom: 0.5rem;
+  flex-grow: 1;
+}
+
+/* Post Tags */
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  margin-bottom: 0.5rem;
+}
+
+.post-tag {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  transition: all 0.2s ease;
+  text-transform: lowercase;
+}
+
+.post-tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
 }
 
 /* Meta - larger text */
 .post-meta {
-  margin-top: 2rem;
+  margin-top: 0.5rem;
   display: flex;
   justify-content: space-between;
   font-size: 0.95rem;

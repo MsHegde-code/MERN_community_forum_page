@@ -24,11 +24,10 @@ app.use(cors({
 
 app.use(express.json());
 
+// mapping of routes to the URL
 app.use("/api/auth", authRoutes);
-
 app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);
-// app.use("/api/users", userRoutes);
 app.use("/api/user", userRoutes);
 
 
