@@ -5,6 +5,12 @@
     margin: 0;
 }
 
+@media (max-width: 480px) {
+    .summary-container {
+        grid-template-columns: 1fr;
+    }
+}
+
 .summary-card {
     background: #ffffff;
     padding: 16px;
