@@ -11,8 +11,6 @@ import protect from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-/* ---------- FIXED ORDER ---------- */
-
 // STATIC routes first
 router.get("/count", getPostCount);
 router.get("/stats", getPostStats);

@@ -55,7 +55,7 @@ function CreatePost() {
       // Redirect to Home after short delay
       setTimeout(() => {
         navigate("/");
-      }, 1500);
+      }, 500);
 
     } catch (error) {
       toast.error("Failed to upload post");

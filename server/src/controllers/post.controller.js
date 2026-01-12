@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Post from "../models/Posts.js";
 
+// contains the business logic.
 /**
  * Create a new post
  */
@@ -16,11 +17,12 @@ export const createPost = async (req, res) => {
     const post = await Post.create({
       title,
       content,
-      author: req.user.name, // store author display name
+      author: req.user.name, // store user display name
       category,
       tags
     });
 
+    // code - 201 says request has succeeded and has led to the creation of one or more new resources on the server
     res.status(201).json(post);
   } catch (error) {
     res.status(500).json({ message: "Failed to create post" });
